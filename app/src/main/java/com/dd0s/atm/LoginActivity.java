@@ -28,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
         String Password = edPassword.getText().toString();
         if(Account.equals("jcn13") && Password.equals("98765")){
             Toast.makeText(this, "Login Success!!",Toast.LENGTH_LONG).show();
+            getIntent().putExtra("LOGIN_ACCOUNT", Account);
+            getIntent().putExtra("LOGIN_PASSWORD", Password);
+            setResult(RESULT_OK,getIntent());
             finish();
         }else{
             new AlertDialog.Builder(this)
