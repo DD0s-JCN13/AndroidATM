@@ -1,5 +1,6 @@
 package com.dd0s.atm;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,12 @@ public class LoginActivity extends AppCompatActivity {
             getIntent().putExtra("LOGIN_ACCOUNT", Account);
             getIntent().putExtra("LOGIN_PASSWORD", Password);
             setResult(RESULT_OK,getIntent());
-            finish();
+            getSharedPreferences("atm",MODE_PRIVATE)
+                    .edit()
+                    .putString("USER",Account)
+                    .apply();
+            Intent intent = new Intent(this,CreateUserActivity.class);
+            startActivity(intent);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("ATM")
