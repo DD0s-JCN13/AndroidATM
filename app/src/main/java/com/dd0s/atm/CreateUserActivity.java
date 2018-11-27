@@ -16,7 +16,7 @@ public class CreateUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
     }
-    public void input(View v){
+    public void next(View v){
         TextView ednickname = findViewById(R.id.ed_Nickname);
         String nickname = ednickname.getText().toString();
         if(nickname.isEmpty()){
@@ -33,5 +33,8 @@ public class CreateUserActivity extends AppCompatActivity {
             Intent intent = new Intent(this,AgeActivity.class);
             startActivity(intent);
         }
+    }
+    public void back(View v){
+        finish();
     }
 }

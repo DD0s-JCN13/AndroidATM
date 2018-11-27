@@ -16,12 +16,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RC_LOGIN){
-            if(resultCode == RESULT_OK){
-                String Account = data.getStringExtra("LOGIN_ACCOUNT");
-                String Password = data.getStringExtra("LOGIN_PASSWORD");
-                Log.d("RESULT", Account + " / "+ Password);
-            }else{
+            if(resultCode != RESULT_OK){
                 finish();
+            }else{
+                login = true;
+                String nickname = getSharedPreferences("atm",MODE_PRIVATE)
+                        .getString("nickname",null);
+                int age = getSharedPreferences("atm",MODE_PRIVATE)
+                        .getInt("age",0);
+                String gender = getSharedPreferences("atm",MODE_PRIVATE)
+                        .getString("gender",null);
+                if(nickname.equals(null) || age==0 || gender.equals(null)){
+                    Intent redo = new Intent(this,CreateUserActivity.class);
+                    startActivity(redo);
+                }
             }
         }
     }
