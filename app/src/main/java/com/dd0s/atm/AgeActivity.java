@@ -33,6 +33,7 @@ public class AgeActivity extends AppCompatActivity {
             startActivity(gender);
         }
     }
+
     public void back(View v){
         finish();
     }
