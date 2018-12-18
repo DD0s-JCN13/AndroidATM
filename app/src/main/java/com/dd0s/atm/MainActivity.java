@@ -55,42 +55,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivityForResult(intent, RC_LOGIN);
         }
-        RecyclerView recyclerview = findViewById(R.id.recycler);
-        recyclerview.setHasFixedSize(true);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview.setAdapter(new FruitAdapter());
-    }
-    private void listView(){
-        ArrayAdapter<String> Adapter  = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,fruits);
-        ListView listview = findViewById(R.id.list);
-        listview.setAdapter(Adapter);
-    }
-
-    private class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHolder> {
-        @NonNull
-        @Override
-        public FruitViewHolder onCreateViewHolder(@NonNull ViewGroup item, int viewType) {
-            View view = LayoutInflater.from(item.getContext())
-                    .inflate(android.R.layout.simple_list_item_1,item,false);
-            return new FruitViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull FruitAdapter.FruitViewHolder holder, int position) {
-            holder.nameText.setText(fruits.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return fruits.size();
-        }
-
-        class FruitViewHolder extends RecyclerView.ViewHolder{
-            TextView nameText;
-            public FruitViewHolder(@NonNull View itemView) {
-                super(itemView);
-                nameText = itemView.findViewById(android.R.id.text1);
-            }
-        }
     }
 }
