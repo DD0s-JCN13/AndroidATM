@@ -39,7 +39,7 @@ public class AgeActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull AgeHolder Holder, int i) {
-            Holder.ageroler.setText(Age[i]+"");
+            Holder.ageroler.setText(Age[i]+" ");
         }
         @Override
         public int getItemCount() {
