@@ -27,6 +27,13 @@ public class LoginActivity extends AppCompatActivity {
         String Password = edPassword.getText().toString();
         if(Userid.equals("jacky")&&Password.equals("123456")){
             Toast.makeText(this,"登入成功！",Toast.LENGTH_LONG).show();
+            getIntent().putExtra("LOGIN_ACCOUNT",Userid);
+            getIntent().putExtra("LOGIN_PASSWORD",Password);
+            setResult(RESULT_OK,getIntent());
+            getSharedPreferences("atm",MODE_PRIVATE)
+                    .edit()
+                    .putString("USER",Userid)
+                    .apply();
             Intent intent = new Intent(this,UserActivity.class);
             startActivity(intent);
         }else{

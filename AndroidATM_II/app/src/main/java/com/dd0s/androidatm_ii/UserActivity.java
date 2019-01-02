@@ -29,6 +29,10 @@ public class UserActivity extends AppCompatActivity {
                     .setPositiveButton("確定",null)
                     .show();
         }else{
+            getSharedPreferences("atm",MODE_PRIVATE)
+                    .edit()
+                    .putString("USERNAME",Username)
+                    .apply();
             Intent intent = new Intent(this,AgeActivity.class);
             startActivity(intent);
         }
