@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class AgeActivity extends AppCompatActivity {
 
@@ -30,23 +32,40 @@ public class AgeActivity extends AppCompatActivity {
     public void listview(){
         ageList.setHasFixedSize(true);
         ageList.setLayoutManager(new LinearLayoutManager(this));
-        ageList.setAdapter(new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return null;
-            }
+        ageList.setAdapter(new AgeAdapter());
+    }
+    class AgeAdapter extends RecyclerView.Adapter<AgeAdapter.AgeHolder>{
 
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        @NonNull
+        @Override
+        public AgeAdapter.AgeHolder onCreateViewHolder(@NonNull ViewGroup family, int i) {
+            return new AgeHolder(getLayoutInflater().inflate(R.layout.age_role,family,false));
+        }
 
-            }
+        @Override
+        public void onBindViewHolder(@NonNull AgeHolder Holder, final int i) {
+            Holder.list_age.setText(age[i]+"");
+            Holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("AgeActivity","onClick"+age[i]);
+                    edAge.setText(age[i]);
+                }
+            });
+        }
 
-            @Override
-            public int getItemCount() {
-                return 0;
+        @Override
+        public int getItemCount() {
+            return age.length;
+        }
+
+        class AgeHolder extends RecyclerView.ViewHolder {
+            TextView list_age;
+            public AgeHolder(@NonNull View itemView) {
+                super(itemView);
+                list_age = itemView.findViewById(R.id.listAge);
             }
-        });
+        }
     }
     public void next(View v){
         String age = edAge.getText().toString();
