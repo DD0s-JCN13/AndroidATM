@@ -53,7 +53,6 @@ public class AgeActivity extends AppCompatActivity {
                 }
             });
         }
-
         @Override
         public int getItemCount() {
             return age.length;
