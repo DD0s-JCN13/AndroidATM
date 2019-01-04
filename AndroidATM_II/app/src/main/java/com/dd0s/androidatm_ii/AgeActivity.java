@@ -43,13 +43,14 @@ public class AgeActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AgeHolder Holder, final int i) {
+        public void onBindViewHolder(@NonNull final AgeHolder Holder, final int i) {
             Holder.list_age.setText(age[i]+"");
             Holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("AgeActivity","onClick"+age[i]);
-                    edAge.setText(age[i]);
+                    int clicked = Integer.parseInt(Holder.list_age.getText().toString());
+                    edAge.setText(String.valueOf(clicked));
                 }
             });
         }
