@@ -1,6 +1,7 @@
 package com.dd0s.androidatm_ii;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class GenderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gender);
         findview();
+        listview();
     }
     public void findview(){
         edGender = findViewById(R.id.ed_Gender);
@@ -37,13 +39,6 @@ public class GenderActivity extends AppCompatActivity {
     }
     public void next(View v){
         String Gender = edGender.getText().toString();
-        class genderlistener implements View.OnClickListener {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                startActivity(intent);
-            }
-        }
         if(Gender.isEmpty()){
             new AlertDialog.Builder(this)
                     .setTitle("Error")
@@ -51,14 +46,22 @@ public class GenderActivity extends AppCompatActivity {
                     .setPositiveButton("OK",null)
                     .show();
         }else if(Gender.equals("不公開")){
-            Recheck = true;
             new AlertDialog.Builder(this)
                     .setTitle("提示")
                     .setMessage("您可以在資料創建後再次修改資料，但性別僅能修改一次，敬請注意")
-                    .setPositiveButton("我知道了",null)
+                    .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            Recheck = true;
+                        }
+                    })
                     .setNegativeButton("取消",null)
                     .show();
             if(Recheck){
+                getSharedPreferences("atm",MODE_PRIVATE)
+                        .edit()
+                        .putString("Gender",Gender)
+                        .apply();
                 Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
             }
@@ -78,7 +81,7 @@ public class GenderActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final @NonNull GenderHolder Holder, final int i) {
-            Holder.list_Gender.setText(Gender[i]+"");
+            Holder.list_Gender.setText(Gender[i]+" ");
             Holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

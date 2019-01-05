@@ -28,7 +28,11 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 login = true;
                 String nickname = getSharedPreferences("atm", MODE_PRIVATE)
-                        .getString("nickname",null);
+                        .getString("USERNAME",null);
+                int age = getSharedPreferences("atm",MODE_PRIVATE)
+                        .getInt("AGE",0);
+                String gender = getSharedPreferences("atm",MODE_PRIVATE)
+                        .getString("GENDER",null);
             }
         }
     }
